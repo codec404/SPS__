@@ -1,26 +1,20 @@
 import random
-options=["STONE","PAPER","SCISSOR"]
-round = 1
-print("Enter your name:")
-Name=input()
-computer=0
-player=0
+
+finalscore = 0
 def checkStartCorrect(inpt):
     f = False
     if inpt!="":
         f = True
     return f
 
-def Score_display() :
+def Score_display(computer,player,Name) :
     print("Score :")
     print("Computer:",computer," ",Name,":",player)
-print("Hello",Name)
 
-
-def game() :
+def game(options,Name,round,computer,player) :
     print("Press <ENTER> to start")
     inp=input()
-
+    global finalscore
     if inp.upper() == "Q" :
         print("Are You sure to Quit ?    :   Y or N")
         dec = input()
@@ -29,15 +23,15 @@ def game() :
             exit()
         else :
             print("Redirecting...")
-            game()
+            game(options,Name,round,computer,player)
     elif checkStartCorrect(inp):
         print("....Wrong Input....")
-        game()
+        game(options,Name,round,computer,player)
     else:
         print("Game Rules:")
         print("You have to play 10 rounds....The one who scores more wins it!!!")
         print()
-        Score_display()
+        Score_display(computer,player,Name)
         print()
         t = 10
 
@@ -58,7 +52,7 @@ def game() :
                     print("Same Pick")
                     print()
                     print('After Round -',round,':')
-                    Score_display()
+                    Score_display(computer,player,Name)
                     print()
                     t-=1
                     round+=1
@@ -79,7 +73,7 @@ def game() :
                     print("Same Pick")
                     print()
                     print('After Round -',round,':')
-                    Score_display()
+                    Score_display(computer,player,Name)
                     print()
                     t-=1
                     round+=1
@@ -100,19 +94,24 @@ def game() :
                     print("Same Pick")
                     print()
                     print('After Round -',round,':')
-                    Score_display()
+                    Score_display(computer,player,Name)
                     print()
                     t-=1
                     round+=1
                     continue
             else:
                 print("Wrong Choice!!!")
-                exit()
+                print("\\\\\\\\\\\\\\\\\\")
+                print("Choose Correctly between 1 , 2 and 3")
+                print("/////////")
+                continue
             print('After Round -',round,':')
-            Score_display()
+            Score_display(computer,player,Name)
             print()
             t-=1
             round+=1
+        
+        finalscore=player
         print("Final Score:")
         print("Computer:",computer," ",Name,":",player)
         if player>computer:
@@ -121,3 +120,6 @@ def game() :
             print("Computer is winner!!!")
         else:
             print("DRAW!!!")
+
+def finalScore() :
+    return finalscore
